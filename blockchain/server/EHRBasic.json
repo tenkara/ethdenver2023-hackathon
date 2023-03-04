@@ -1,0 +1,244 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "patientInfo",
+        "type": "bytes32[]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "hcpName",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "infoToAuth",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "reason",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "hcpAddress",
+        "type": "address"
+      }
+    ],
+    "name": "authorizeProvider",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "hcpAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getHCPDetails",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "hcpName",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "infoToAuth",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "reason",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bool",
+            "name": "authorised",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct SmartHealth.ProviderData",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getPatientSummary",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "age",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "birthSex",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "weight",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "height",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct SmartHealth.PatientSummary",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "hcpAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getPatientSummaryHCP",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "age",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "birthSex",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "weight",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "height",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct SmartHealth.PatientSummary",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getPatientVitals",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "heartRate",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "bloodPressure",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "oxygenSat",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "temperature",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct SmartHealth.PatientVitals",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "hcpAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getPatientVitalsHCP",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "heartRate",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "bloodPressure",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "oxygenSat",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "temperature",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct SmartHealth.PatientVitals",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
