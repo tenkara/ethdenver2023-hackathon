@@ -1,16 +1,39 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { Header as MHeader } from "@mantine/core";
 import Image from "next/image";
 import Link from "next/link";
-import { useUser } from "@auth0/nextjs-auth0/client";
 import { Menu } from "@mantine/core";
-import { IconBase } from "react-icons";
+import { useMetamask } from "@/hooks/useMetamask";
+import { Loading } from "../Loading";
 
 type Props = {};
 
 export default function Header({}: Props) {
-    const { user } = useUser();
+    const {
+        dispatch,
+        state: { status, isMetamaskInstalled, wallet },
+    } = useMetamask();
+
+    const showInstallMetamask =
+        status !== "pageNotLoaded" && !isMetamaskInstalled;
+    const showConnectButton = status !== "pageNotLoaded" && isMetamaskInstalled;
+
+    const handleConnect = async () => {
+        dispatch({ type: "loading" });
+
+        window.ethereum
+            .request({
+                method: "eth_requestAccounts",
+            })
+            .then((accounts) => {
+                if (accounts.length > 0) {
+                    dispatch({ type: "connect", wallet: accounts[0] });
+                }
+            })
+            .catch((err) => {
+                dispatch({ type: "pageLoaded", isMetamaskInstalled });
+            });
+    };
 
     return (
         <header className="sticky top-0 z-[20] h-[70px] border-b border-b-gray-200">
@@ -25,26 +48,61 @@ export default function Header({}: Props) {
                         />
                     </Link>
                     <div>
-                        {user ? (
+                        {wallet ? (
                             <Menu>
                                 <Menu.Target>
-                                    <img
-                                        className="rounded-full bg-primary"
-                                        alt="pfp"
-                                        src={user.picture || ""}
-                                        width={50}
-                                        height={50}
-                                    />
+                                    <div className="h-10 w-10 rounded-full bg-primary-500"></div>
                                 </Menu.Target>
                                 <Menu.Dropdown>
-                                    <Menu.Label>Your Profile</Menu.Label>
-                                    <Menu.Item color="red">
-                                        <a href="/api/auth/logout">Log out</a>
+                                    <Menu.Label>
+                                        <div className="flex items-center">
+                                            <div className="text-xs text-gray-500">
+                                                {wallet.slice(0, 6)}...
+                                                {wallet.slice(
+                                                    wallet.length - 4,
+                                                    wallet.length
+                                                )}
+                                            </div>
+                                        </div>
+                                    </Menu.Label>
+                                    <Menu.Divider />
+                                    <Menu.Item
+                                        onClick={() =>
+                                            dispatch({ type: "disconnect" })
+                                        }
+                                    >
+                                        <span className="text-red-500">
+                                            Disconnect
+                                        </span>
                                     </Menu.Item>
                                 </Menu.Dropdown>
                             </Menu>
                         ) : (
-                            <Link href="/api/auth/login" className="text-text text-xl">Login</Link>
+                            <>
+                                {showConnectButton && (
+                                    <button
+                                        onClick={handleConnect}
+                                        className="rounded bg-primary p-2 text-white hover:shadow transition-all duration-500 w-fit"
+                                    >
+                                        {status === "loading" ? (
+                                            <Loading />
+                                        ) : (
+                                            "Connect Wallet"
+                                        )}
+                                    </button>
+                                )}
+
+                                {showInstallMetamask && (
+                                    <Link
+                                        href="https://metamask.io/"
+                                        target="_blank"
+                                    >
+                                        <button className="rounded bg-primary p-2 text-white hover:shadow">
+                                            Connect Wallet
+                                        </button>
+                                    </Link>
+                                )}
+                            </>
                         )}
                     </div>
                 </div>

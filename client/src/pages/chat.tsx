@@ -1,8 +1,7 @@
+import withPageAuthRequired from "@/components/auth/withPageAuthRequired";
 import Message from "@/components/chat/Message";
 import Header from "@/components/shell/Header";
-import useChat from "@/hooks/useChat";
 import { MessageI } from "@/types/Chat.types";
-import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,7 +21,6 @@ function Chat({}: Props) {
         // Keep document scrolled to bottom
         const chat = document.getElementById("chat");
         if (chat) window.scrollTo(0, chat.scrollHeight);
-        console.log(chat);
     }, [messages]);
 
     const handleSendMessage = async (e: FormEvent<HTMLFormElement>) => {
@@ -71,11 +69,6 @@ function Chat({}: Props) {
                         <h1 className="text-3xl text-text">
                             Your Personal Health Assistant
                         </h1>
-                        <Link href="/sp/chat">
-                            <div className="text-text-200 mt-4 bg-primary-100 p-2 text-xl rounded hover:shadow">
-                                Habla español?
-                            </div>
-                        </Link>
                         <h2 className="mt-20 text-2xl text-text-200">
                             Start a Conversation Below
                         </h2>
