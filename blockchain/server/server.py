@@ -53,29 +53,6 @@ embedding_model = "text-embedding-ada-002"
 embedding_encoding = "cl100k_base"  # latest tokenizer for second gen models
 max_tokens = 8000  # max tokens for second gen models and tokenizer above is 8191
 
-# initilaize web3
-w3 = Web3(Web3.HTTPProvider(env.get("ALCHEMY_URL")));
-
-# Connect to the blockchain
-if(w3.isConnected()):
-    print("Connected to the blockchain")   
-else:
-    print("Not connected to the blockchain")
-
-# Get the contract instance
-with open('EHRBasic.json') as json_file:
-    abi = json.load(json_file)
-    contract_instance = w3.eth.contract(address=env.get('PATIENT_CONTRACT_ADDRESS'), abi=abi)
-    print(f"Contract instance: {contract_instance}")
-
-# Retrieve EHR
-account_1 = os.getenv('ACCOUNT_ADDRESS_1')
-patient_summary = contract_instance.functions.getPatientSummary().call({"from": account_1})
-
-# Decode the EHR - remove the null bytes and decode the utf-8
-decoded_summary = [b.decode("utf-8").strip('\x00') for b in patient_summary]
-
-print(f"Decoded Patient Summary: {decoded_summary}")
 
 # Routes
 
