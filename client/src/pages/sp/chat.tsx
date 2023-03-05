@@ -22,7 +22,6 @@ function Chat({}: Props) {
         // Keep document scrolled to bottom
         const chat = document.getElementById("chat");
         if (chat) window.scrollTo(0, chat.scrollHeight);
-        console.log(chat);
     }, [messages]);
 
     const handleSendMessage = async (e: FormEvent<HTMLFormElement>) => {
@@ -45,7 +44,6 @@ function Chat({}: Props) {
                     { content: input, role: "user" },
                 ],
             });
-            console.log(data);
 
             setMessages([...messages, newMessage, data] as MessageI[]);
         } catch {}
@@ -54,9 +52,9 @@ function Chat({}: Props) {
     };
 
     return (
-        <div className="flex min-h-screen flex-col bg-primary-50" id="chat">
+        <div className="relative flex min-h-screen flex-col bg-primary-50" id="chat">
             <Header />
-            <div className="relative mx-auto flex w-full max-w-4xl grow flex-col">
+            <div className="relative mx-auto flex w-full max-w-4xl grow flex-col z-[2]">
                 <div className="relative flex grow flex-col justify-end p-4">
                     <div
                         className={`absolute top-0 left-[50%] flex h-full w-full translate-x-[-50%] flex-col items-center justify-center text-center transition-all ${
@@ -84,10 +82,11 @@ function Chat({}: Props) {
                         </Link>
                         <BsArrowDown className="mt-10 animate-bounce text-4xl text-text-200" />
                     </div>
-                    {messages.map(({ role, content }, i) => (
+                    {messages.map(({ role, content, url }, i) => (
                         <Message
                             key={"message-" + i}
                             role={role}
+                            url={url}
                             content={content}
                         />
                     ))}
@@ -96,7 +95,7 @@ function Chat({}: Props) {
 
                 <form
                     onSubmit={handleSendMessage}
-                    className="sticky bottom-0 flex items-stretch bg-primary-50 p-4 text-xl text-text"
+                    className="sticky bottom-0 flex items-stretch bg-primary-50 p-4 text-xl text-text z-[10]"
                 >
                     <div className=" flex items-center rounded-l bg-white px-2">
                         <BsChevronRight />
