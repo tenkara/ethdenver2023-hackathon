@@ -56,17 +56,11 @@ export default function Home() {
                     <p className="mt-4 text-2xl text-text-300">
                         SmartHealth is composed of passionate and talented team
                         of Computer Science, Medical, Arts and Business
-                        individuals. Josh, Lizzie, Jason and Raj continue to
-                        apply the latest technology to improve Healthcare.
+                        individuals. Lizzie, Jason and Raj continue to apply the
+                        latest technology to improve Healthcare.
                     </p>
 
-                    <div className="mt-8 flex flex-row items-center justify-center gap-20 px-10">
-                      <Image
-                          src="/people/josh.png"
-                          alt="Josh Nakka"
-                          width={150}
-                          height={150}
-                      />
+                    <div className="mt-8 flex flex-row flex-wrap items-center justify-center gap-20 px-10">
                         <Image
                             src="/people/lizzie.jpg"
                             alt="Lizzie Nakka"
@@ -95,13 +89,14 @@ export default function Home() {
                         <span className="text-primary">How</span> Do We Do It?
                     </h1>
                     <p className="mt-4 text-2xl text-text-300">
-                        We leverage the power of GPT3, Reddis Vectorized DB, and
-                        React to provide you with an interactive health
-                        assistant. We put together a database of health
-                        conditions and their symptoms, causes, and treatments.
-                        By pairing our database with GPT3 we are able to help
-                        you understand your health without having to visit a
-                        doctor in person.
+                        We leverage the power of the Ethereum blockchain,
+                        Metamask, GPT3, and React to provide you with an
+                        interactive health assistant. We put together a dataset
+                        of health conditions and their symptoms, causes, and
+                        treatments. By pairing Web3, blockchain smart contract
+                        capabilities for EHR with GPT3 we are able to help you
+                        understand your health without having to visit a doctor
+                        in person.
                     </p>
                 </section>
 
@@ -116,6 +111,18 @@ export default function Home() {
                     </p>
 
                     <div className="mt-8 flex flex-row flex-wrap items-center justify-center gap-20">
+                        <Image
+                            src="/logos/ethereum.png"
+                            alt="Ethereum Logo"
+                            width={60}
+                            height={60}
+                        />
+                        <Image
+                            src="/logos/metamask.svg"
+                            alt="Metamask Logo"
+                            width={80}
+                            height={80}
+                        />
                         <Image
                             src="/logos/openai.png"
                             alt="OpenAi Logo"
@@ -137,18 +144,6 @@ export default function Home() {
                         <Image
                             src="/logos/flask.png"
                             alt="Flask Logo"
-                            width={80}
-                            height={80}
-                        />
-                        <Image
-                            src="/logos/reddis.png"
-                            alt="Reddis Logo"
-                            width={80}
-                            height={80}
-                        />
-                        <Image
-                            src="/logos/postgres.png"
-                            alt="Postgres Logo"
                             width={80}
                             height={80}
                         />

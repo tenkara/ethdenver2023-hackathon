@@ -1,7 +1,10 @@
+import Authorize from "@/components/auth/Authorize";
 import withPageAuthRequired from "@/components/auth/withPageAuthRequired";
 import Message from "@/components/chat/Message";
 import Header from "@/components/shell/Header";
 import { MessageI } from "@/types/Chat.types";
+import { Modal } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,10 +12,14 @@ import React, { FormEvent } from "react";
 import { BsChevronRight, BsArrowDown } from "react-icons/bs";
 import { FiSend } from "react-icons/fi";
 import PendingMessage from "./../components/chat/PendingMessage";
+import { useMetamask } from '@/hooks/useMetamask';
 
 type Props = {};
 
 function Chat({}: Props) {
+    const { state: { data: ehr }} = useMetamask();
+
+    const [opened, { open, close }] = useDisclosure(true);
     const [input, setInput] = React.useState("");
     const [messages, setMessages] = React.useState<MessageI[]>([]);
     const [loading, setLoading] = React.useState(false);
@@ -42,6 +49,7 @@ function Chat({}: Props) {
                     ...messages.map(({ content, role }) => ({ content, role })),
                     { content: input, role: "user" },
                 ],
+                ehr
             });
 
             setMessages([...messages, newMessage, data] as MessageI[]);
@@ -106,6 +114,9 @@ function Chat({}: Props) {
                     </button>
                 </form>
             </div>
+            <Modal opened={opened} onClose={close} title="EHR Authorization" centered>
+                <Authorize close={close} />
+            </Modal>
         </div>
     );
 }

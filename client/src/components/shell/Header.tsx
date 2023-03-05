@@ -25,8 +25,12 @@ export default function Header({}: Props) {
             .request({
                 method: "eth_requestAccounts",
             })
-            .then((accounts) => {
+            .then(async(accounts) => {
                 if (accounts.length > 0) {
+                    const balance = await window.ethereum!.request({
+                      method: "eth_getBalance",
+                      params: [accounts[0], "latest"],
+                    });
                     dispatch({ type: "connect", wallet: accounts[0] });
                 }
             })
